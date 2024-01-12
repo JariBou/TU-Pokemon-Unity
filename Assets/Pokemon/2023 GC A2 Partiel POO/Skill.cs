@@ -3,8 +3,9 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
 {
     /// <summary>
     /// Définition abstraite d'une compétence.
+    ///     J'enleve l'abstraction pour pouvoir créer des skills a la vollée pour les tests :)
     /// </summary>
-    public abstract class Skill
+    public class Skill
     {
         public Skill(TYPE type, int power, StatusPotential status)
         {

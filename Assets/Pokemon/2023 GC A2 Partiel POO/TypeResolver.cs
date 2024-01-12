@@ -6,9 +6,9 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
     /// <summary>
     /// Définition des types dans le jeu
     /// </summary>
-    public enum TYPE { NORMAL, WATER, FIRE, GRASS }
+    public enum TYPE { NORMAL, WATER, FIRE, GRASS, ROCK }
 
-    public class TypeResolver
+    public static class TypeResolver
     {
 
         /// <summary>
@@ -27,7 +27,57 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// </returns>
         public static float GetFactor(TYPE attacker, TYPE receiver)
         {
-            throw new NotImplementedException();
+            return receiver switch
+            {
+                TYPE.NORMAL => 1f,
+                TYPE.WATER => WaterReceiver(attacker),
+                TYPE.FIRE => FireReceiver(attacker),
+                TYPE.GRASS => GrassReceiver(attacker),
+                TYPE.ROCK => RockReceiver(attacker),
+                
+                _ => throw new ArgumentOutOfRangeException(nameof(receiver))
+            };
+        }
+
+
+        private static float FireReceiver(TYPE attacker)
+        {
+            return attacker switch
+            {
+                TYPE.WATER or TYPE.ROCK => 1.2f,
+                TYPE.GRASS or TYPE.FIRE => 0.8f,
+                _ => 1
+            };
+        }
+        
+        private static float WaterReceiver(TYPE attacker)
+        {
+            return attacker switch
+            {
+                TYPE.WATER or TYPE.FIRE => 0.8f,
+                TYPE.GRASS => 1.2f,
+                _ => 1
+            };
+        }
+        
+        private static float GrassReceiver(TYPE attacker)
+        {
+            return attacker switch
+            {
+                TYPE.FIRE => 1.2f,
+                TYPE.GRASS or TYPE.WATER => 0.8f,
+                _ => 1
+            };
+        }
+        
+        private static float RockReceiver(TYPE attacker)
+        {
+            return attacker switch
+            {
+                TYPE.WATER or TYPE.GRASS => 1.2f,
+                TYPE.FIRE or TYPE.ROCK => 0.8f,
+                _ => 1
+            };
         }
 
     }

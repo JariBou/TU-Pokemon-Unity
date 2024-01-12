@@ -4,7 +4,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
     /// <summary>
     /// Enum des status de chaque attaque (voir plus bas)
     /// </summary>
-    public enum StatusPotential { NONE, SLEEP, BURN, CRAZY }
+    public enum StatusPotential { NONE, SLEEP, BURN, CRAZY, POISON }
     
     public class StatusEffect
     {
@@ -23,6 +23,8 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
                     return new BurnStatus();
                 case StatusPotential.CRAZY:
                     return new CrazyStatus();
+                case StatusPotential.POISON:
+                    return new PoisonStatus();
                 case StatusPotential.NONE:
                 default:
                     return null;
@@ -96,6 +98,16 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
     public class CrazyStatus : StatusEffect
     {
         public CrazyStatus() : base(1, 0, false, 0.3f)
+        {
+        }
+    }
+    
+    /// <summary>
+    /// Empoisonné, le personnage perd des points de vie à la fin de chaque tour
+    /// </summary>
+    public class PoisonStatus : StatusEffect
+    {
+        public PoisonStatus() : base(3, 15, true, 0f)
         {
         }
     }
