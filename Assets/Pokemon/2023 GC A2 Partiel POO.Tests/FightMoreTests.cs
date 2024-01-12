@@ -212,11 +212,11 @@ namespace _2023_GC_A2_Partiel_POO.Tests.Level_2
             iceBucket.UseOn(dummy);
             Assert.That(dummy.CurrentStatus, Is.TypeOf(typeof(BurnStatus)));
             
-            iceBucket = new IceBucket();
+            iceBucket = (IceBucket) PokeItem.CreateItem(ItemPrefabs.AntiBurn);
             iceBucket.UseOn(dummy);
             Assert.That(dummy.CurrentStatus, Is.EqualTo(null));
 
-            wakeUp = new WakeUpThisNoHotel();
+            wakeUp = (WakeUpThisNoHotel) PokeItem.CreateItem(ItemPrefabs.AntiSleep);
             
             dummy.ApplyNewStatusEffect(StatusPotential.POISON);
             RehabFreeEntry rehab = new();
@@ -228,7 +228,7 @@ namespace _2023_GC_A2_Partiel_POO.Tests.Level_2
             rehab.UseOn(dummy);
             Assert.That(dummy.CurrentStatus, Is.EqualTo(null));
 
-            rehab = new RehabFreeEntry();
+            rehab = (RehabFreeEntry) PokeItem.CreateItem(ItemPrefabs.AntiPoison);
 
             rehab.UseOn(dummy);
             dummy.ApplyNewStatusEffect(StatusPotential.POISON);
